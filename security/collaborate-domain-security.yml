@@ -1,0 +1,60 @@
+generated: '2026-07-20'
+method: probed
+source: live probe of collaborate.com (curl HEAD + dig)
+notes: >-
+  collaborate.com no longer hosts a product. Plain HTTP returns 301 to
+  https://www.webex.com/ (Cisco Webex); HTTPS on the apex times out and serves
+  no site of its own. Nameservers are MarkMonitor, consistent with a
+  brand-protection / redirect domain held by the acquirer rather than an
+  operating company. Absence of records below is recorded fact, not a gap in
+  the probe.
+hosts:
+- host: collaborate.com
+  https: false
+  https_error: connection timed out (15s)
+  http: true
+  http_status: 301
+  redirects_to: https://www.webex.com/
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  security_headers:
+  - x-content-type-options: nosniff
+  - x-frame-options: DENY
+  - referrer-policy: no-referrer
+  - content-security-policy: "default-src 'none'"
+domains:
+- domain: collaborate.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false
+  dmarc_policy: null
+  mx: []
+  nameservers:
+  - ns1.markmonitor.com
+  - ns2.markmonitor.com
+  - ns3.markmonitor.com
+  - ns4.markmonitor.com
+  - ns5.markmonitor.com
+  - ns6.markmonitor.com
+  - ns7.markmonitor.com
+well_known_probe:
+- path: /.well-known/security.txt
+  status: null
+  result: connection failed (no HTTPS listener)
+- path: /.well-known/openid-configuration
+  status: null
+  result: connection failed (no HTTPS listener)
+- path: /.well-known/oauth-authorization-server
+  status: null
+  result: connection failed (no HTTPS listener)
+- path: /.well-known/api-catalog
+  status: null
+  result: connection failed (no HTTPS listener)
+- path: /.well-known/ai-plugin.json
+  status: null
+  result: connection failed (no HTTPS listener)
+- path: /llms.txt
+  status: null
+  result: connection failed (no HTTPS listener)
